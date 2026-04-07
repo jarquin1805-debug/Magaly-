@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recomendaciones Estratégicas – Tesla</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Tesla Brand ──
+       Red   : #E31937
+       Black : #171A20   (Tesla dark, not pure black)
+       White : #FFFFFF
+       Gray  : #393C41   (Tesla body text)
+       LGray : #F4F4F4   (Tesla bg)
+    */
+    :root {
+      --red:    #E31937;
+      --red2:   #b01228;
+      --dark:   #171A20;
+      --gray:   #393C41;
+      --lgray:  #F4F4F4;
+      --mgray:  #D0D0D0;
+      --white:  #FFFFFF;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0d0f12;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    /* Progress */
+    .progress-track {
+      width: 100%; max-width: 960px; height: 3px;
+      background: rgba(255,255,255,.1); border-radius: 3px;
+      margin-bottom: 16px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--red);
+      border-radius: 3px; transition: width .45s ease;
+    }
+
+    .slideshow { width: 100%; max-width: 960px; }
+
+    .slide {
+      display: none; border-radius: 20px; overflow: hidden;
+      min-height: 540px;
+      box-shadow: 0 32px 80px rgba(0,0,0,.7);
+      animation: fadeUp .45s ease;
+    }
+    .slide.active { display: flex; flex-direction: column; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ════════════════════════════════
+       SLIDE 1 – COVER (Tesla dark bg)
+    ════════════════════════════════ */
+    .slide-cover {
+      background: var(--dark);
+      align-items: center; justify-content: center;
+      text-align: center; padding: 64px 48px;
+      position: relative; overflow: hidden;
+    }
+    /* Subtle grid pattern */
+    .slide-cover::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    /* Red glow bottom */
+    .slide-cover::after {
+      content: '';
+      position: absolute; bottom: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 500px; height: 200px;
+      background: radial-gradient(ellipse, rgba(227,25,55,.25), transparent 70%);
+      pointer-events: none;
+    }
+    .cover-wordmark {
+      font-size: 13px; font-weight: 800; letter-spacing: 8px;
+      text-transform: uppercase; color: var(--white);
+      margin-bottom: 32px; position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .cover-wordmark::before, .cover-wordmark::after {
+      content: ''; flex: 1; max-width: 60px; height: 1px;
+      background: rgba(255,255,255,.2);
+    }
+    .cover-title {
+      font-size: clamp(28px,4vw,48px); font-weight: 300;
+      color: var(--white); line-height: 1.2; margin-bottom: 6px;
+      letter-spacing: -1px; position: relative; z-index: 1;
+    }
+    .cover-title strong {
+      font-weight: 800; color: var(--red);
+    }
+    .cover-subtitle {
+      font-size: 13px; color: rgba(255,255,255,.35);
+      margin-bottom: 44px; position: relative; z-index: 1;
+      letter-spacing: .5px;
+    }
+    .cover-cards {
+      display: flex; gap: 12px; justify-content: center;
+      position: relative; z-index: 1; flex-wrap: wrap;
+    }
+    .ccard {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px; padding: 14px 20px;
+      text-align: left; min-width: 200px;
+      transition: border-color .2s;
+    }
+    .ccard:hover { border-color: rgba(227,25,55,.4); }
+    .ccard-icon { font-size: 20px; margin-bottom: 8px; }
+    .ccard-num {
+      font-size: 9px; font-weight: 700; letter-spacing: 2px;
+      color: var(--red); text-transform: uppercase; margin-bottom: 4px;
+    }
+    .ccard-label {
+      font-size: 12px; font-weight: 600; color: rgba(255,255,255,.8);
+    }
+
+    /* ════════════════════════════════
+       SLIDES 2-4 – WHITE BG (Tesla.com style)
+    ════════════════════════════════ */
+    .slide-white {
+      background: var(--white);
+      flex: 1;
+    }
+
+    /* Top red accent bar */
+    .red-bar {
+      height: 4px;
+      background: var(--red);
+    }
+
+    /* Section header */
+    .s-header {
+      display: flex; align-items: center;
+      padding: 28px 48px 22px;
+      border-bottom: 1px solid var(--lgray);
+      gap: 18px;
+    }
+    .s-num {
+      font-size: 11px; font-weight: 800; letter-spacing: 3px;
+      color: var(--red); text-transform: uppercase;
+    }
+    .s-divider {
+      width: 1px; height: 20px; background: var(--mgray);
+    }
+    .s-title {
+      font-size: 12px; font-weight: 600; color: var(--gray);
+      letter-spacing: 1px; text-transform: uppercase; flex: 1;
+    }
+    .s-badge {
+      font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--white);
+      background: var(--red); border-radius: 4px;
+      padding: 4px 10px;
+    }
+
+    /* Content area */
+    .s-body { padding: 40px 48px; flex: 1; display: flex; gap: 48px; }
+
+    /* Left column */
+    .s-left { flex: 0 0 56%; }
+    .s-rec-num {
+      font-size: 80px; font-weight: 800; color: var(--lgray);
+      line-height: 1; margin-bottom: -8px;
+      font-variant-numeric: tabular-nums;
+    }
+    .s-rec-title {
+      font-size: 24px; font-weight: 700; color: var(--dark);
+      line-height: 1.25; margin-bottom: 16px;
+    }
+    .s-rec-title span { color: var(--red); }
+    .s-rec-desc {
+      font-size: 14px; color: var(--gray);
+      line-height: 1.85;
+    }
+    .s-rec-desc strong { color: var(--dark); font-weight: 700; }
+
+    /* Right column – data card */
+    .s-right {
+      flex: 1; display: flex; flex-direction: column; gap: 12px;
+      justify-content: center;
+    }
+    .data-card {
+      background: var(--lgray);
+      border-radius: 14px; padding: 18px 20px;
+      border-left: 4px solid var(--red);
+    }
+    .data-card-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--red); margin-bottom: 6px;
+    }
+    .data-card-value {
+      font-size: 15px; font-weight: 700; color: var(--dark);
+      margin-bottom: 4px;
+    }
+    .data-card-sub {
+      font-size: 11.5px; color: var(--gray); line-height: 1.5;
+    }
+
+    /* ── NAVEGACIÓN ── */
+    .nav {
+      display: flex; align-items: center; justify-content: center;
+      gap: 14px; margin-top: 22px;
+    }
+    .nav-btn {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--white); font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .22s; outline: none;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: var(--red); border-color: var(--red);
+    }
+    .nav-btn:disabled { opacity: .2; cursor: default; }
+    .dots { display: flex; gap: 8px; align-items: center; }
+    .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,.2); cursor: pointer; transition: all .3s;
+    }
+    .dot.active {
+      width: 22px; border-radius: 3px; background: var(--red);
+    }
+    .slide-num { font-size: 12px; color: rgba(255,255,255,.25); min-width: 48px; text-align: center; }
+    .key-hint  { font-size: 10px; color: rgba(255,255,255,.12); margin-top: 10px; text-align: center; letter-spacing: 1px; }
+  </style>
+</head>
+<body>
+
+  <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+
+  <div class="slideshow" id="slideshow">
+
+    <!-- ══ PORTADA ══ -->
+    <div class="slide slide-cover active" id="slide-1">
+      <div class="cover-wordmark">Tesla Inc.</div>
+      <h1 class="cover-title">Recomendaciones<br><strong>Estratégicas</strong></h1>
+      <p class="cover-subtitle">Sección 6 · Análisis Empresarial · 2026</p>
+      <div class="cover-cards">
+        <div class="ccard">
+          <div class="ccard-icon">🚗</div>
+          <div class="ccard-num">Rec. 01</div>
+          <div class="ccard-label">Project Redwood</div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-icon">💻</div>
+          <div class="ccard-num">Rec. 02</div>
+          <div class="ccard-label">FSD como SaaS</div>
+        </div>
+        <div class="ccard">
+          <div class="ccard-icon">⚡</div>
+          <div class="ccard-num">Rec. 03</div>
+          <div class="ccard-label">Megapacks</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ REC 01 ══ -->
+    <div class="slide slide-white" id="slide-2">
+      <div class="red-bar"></div>
+      <div class="s-header">
+        <span class="s-num">01</span>
+        <div class="s-divider"></div>
+        <span class="s-title">Mercado Automotriz</span>
+        <span class="s-badge">01 / 03</span>
+      </div>
+      <div class="s-body">
+        <div class="s-left">
+          <div class="s-rec-num">01</div>
+          <h2 class="s-rec-title">Lanzamiento del<br>Modelo <span>Económico</span><br>— Project Redwood</h2>
+          <p class="s-rec-desc">Para mantener la cuota de mercado frente a competidores chinos, Tesla debe priorizar el lanzamiento de su <strong>vehículo de $25,000 en 2026</strong>. Esta iniciativa ampliaría su base de clientes hacia segmentos de ingreso medio, consolidando el liderazgo global en vehículos eléctricos asequibles.</p>
+        </div>
+        <div class="s-right">
+          <div class="data-card">
+            <div class="data-card-label">Precio Objetivo</div>
+            <div class="data-card-value">$25,000 USD</div>
+            <div class="data-card-sub">El vehículo eléctrico más accesible de Tesla</div>
+          </div>
+          <div class="data-card">
+            <div class="data-card-label">Meta de Lanzamiento</div>
+            <div class="data-card-value">2026</div>
+            <div class="data-card-sub">Respuesta estratégica ante la competencia china</div>
+          </div>
+          <div class="data-card">
+            <div class="data-card-label">Objetivo</div>
+            <div class="data-card-value">Cuota de Mercado</div>
+            <div class="data-card-sub">Segmentos de ingreso medio a nivel global</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ REC 02 ══ -->
+    <div class="slide slide-white" id="slide-3">
+      <div class="red-bar"></div>
+      <div class="s-header">
+        <span class="s-num">02</span>
+        <div class="s-divider"></div>
+        <span class="s-title">Software &amp; Servicios Digitales</span>
+        <span class="s-badge">02 / 03</span>
+      </div>
+      <div class="s-body">
+        <div class="s-left">
+          <div class="s-rec-num">02</div>
+          <h2 class="s-rec-title">Monetización de<br><span>Software</span> — FSD como<br>Suscripción Recurrente</h2>
+          <p class="s-rec-desc">Migrar el modelo de negocio hacia una <strong>suscripción recurrente de FSD (Software as a Service)</strong>, lo que elevaría los márgenes operativos más allá de la venta física del auto, transformando a Tesla en una empresa de software de alto margen con ingresos más predecibles y estables.</p>
+        </div>
+        <div class="s-right">
+          <div class="data-card">
+            <div class="data-card-label">Modelo de Negocio</div>
+            <div class="data-card-value">SaaS Recurrente</div>
+            <div class="data-card-sub">Full Self-Driving como servicio de suscripción</div>
+          </div>
+          <div class="data-card">
+            <div class="data-card-label">Impacto Financiero</div>
+            <div class="data-card-value">↑ Márgenes Operativos</div>
+            <div class="data-card-sub">Más allá de la venta física del vehículo</div>
+          </div>
+          <div class="data-card">
+            <div class="data-card-label">Beneficio Clave</div>
+            <div class="data-card-value">Ingresos Predecibles</div>
+            <div class="data-card-sub">Independientes del ciclo de ventas de autos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ REC 03 ══ -->
+    <div class="slide slide-white" id="slide-4">
+      <div class="red-bar"></div>
+      <div class="s-header">
+        <span class="s-num">03</span>
+        <div class="s-divider"></div>
+        <span class="s-title">División de Energía Industrial</span>
+        <span class="s-badge">03 / 03</span>
+      </div>
+      <div class="s-body">
+        <div class="s-left">
+          <div class="s-rec-num">03</div>
+          <h2 class="s-rec-title">Expansión del<br>Segmento <span>Energía</span><br>— Megapacks</h2>
+          <p class="s-rec-desc">Ante la saturación del mercado automotriz, Tesla debe <strong>acelerar la división de Megapacks</strong> (baterías a escala industrial) para estabilizar ingresos. Este segmento ofrece márgenes superiores y demanda creciente impulsada por la transición energética global.</p>
+        </div>
+        <div class="s-right">
+          <div class="data-card">
+            <div class="data-card-label">Producto</div>
+            <div class="data-card-value">Megapack</div>
+            <div class="data-card-sub">Baterías de almacenamiento a escala industrial</div>
+          </div>
+          <div class="data-card">
+            <div class="data-card-label">Contexto</div>
+            <div class="data-card-value">Saturación Automotriz</div>
+            <div class="data-card-sub">Diversificación necesaria de fuentes de ingreso</div>
+          </div>
+          <div class="data-card">
+            <div class="data-card-label">Oportunidad</div>
+            <div class="data-card-value">Transición Energética</div>
+            <div class="data-card-sub">Márgenes superiores al segmento automotriz</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="nav">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>&#8592;</button>
+    <div class="dots" id="dots"></div>
+    <span class="slide-num" id="counter">1 / 4</span>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">&#8594;</button>
+  </div>
+  <p class="key-hint">← → Para navegar · Swipe en móvil</p>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const dotsEl = document.getElementById('dots');
+    const bar    = document.getElementById('progress');
+    const counter = document.getElementById('counter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let cur = 0;
+    const tot = slides.length;
+
+    slides.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.onclick = () => goTo(i);
+      dotsEl.appendChild(d);
+    });
+
+    function goTo(n) {
+      slides[cur].classList.remove('active');
+      dotsEl.children[cur].classList.remove('active');
+      cur = Math.max(0, Math.min(n, tot - 1));
+      slides[cur].classList.add('active');
+      dotsEl.children[cur].classList.add('active');
+      counter.textContent = `${cur + 1} / ${tot}`;
+      bar.style.width = `${((cur + 1) / tot) * 100}%`;
+      prevBtn.disabled = cur === 0;
+      nextBtn.disabled = cur === tot - 1;
+    }
+
+    function changeSlide(d) { goTo(cur + d); }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+    });
+
+    let sx = 0;
+    const ss = document.getElementById('slideshow');
+    ss.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+    ss.addEventListener('touchend', e => {
+      const dx = sx - e.changedTouches[0].clientX;
+      if (Math.abs(dx) > 40) changeSlide(dx > 0 ? 1 : -1);
+    });
+
+    bar.style.width = `${(1 / tot) * 100}%`;
+  </script>
+</body>
+</html>
