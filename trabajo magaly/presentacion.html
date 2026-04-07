@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Tesla Análisis Estratégico 2026 | Presentación Slides</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1e2c;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+        }
+
+        .presentation-container {
+            max-width: 1300px;
+            width: 100%;
+            background: #0f1219;
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide-viewport {
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .slide {
+            padding: 2rem 2.2rem;
+            min-height: 550px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .nav-controls {
+            background: #0a0e1a;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .nav-btn {
+            background: #2d3348;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: #e82127;
+            transform: scale(1.02);
+        }
+
+        .slide-counter {
+            background: #1e243b;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .indicators {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #4a5568;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .dot.active {
+            background: #e82127;
+            width: 24px;
+        }
+
+        .slide-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #e82127;
+            padding-left: 1rem;
+        }
+
+        .slide-header i {
+            font-size: 2rem;
+            color: #e82127;
+        }
+
+        .slide-header h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #0a0e1c;
+        }
+
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .card-mini {
+            background: #f8fafc;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            border-left: 4px solid #e82127;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .badge {
+            background: #0a0e1c;
+            color: white;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.8rem;
+        }
+
+        .vrio-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .vrio-table th,
+        .vrio-table td {
+            padding: 0.8rem 0.9rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .vrio-table th {
+            background: #eef2ff;
+            font-weight: 700;
+        }
+
+        .highlight {
+            color: #b91c1c;
+            font-weight: 700;
+        }
+
+        .recom-item {
+            background: #f1f5f9;
+            margin-bottom: 1rem;
+            padding: 0.9rem 1rem;
+            border-radius: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .recom-icon {
+            background: #e82127;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .cover-slide {
+            background: linear-gradient(135deg, #0a0e1c 0%, #1e243b 100%);
+            color: white;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-area {
+            margin: 0 auto 1.4rem auto;
+            width: 300px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 18px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+        }
+
+        .logo-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 0;
+        }
+
+        .cover-slide h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 1rem 0;
+        }
+
+        .student-info {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 1rem 1.5rem;
+            border-radius: 2rem;
+            width: fit-content;
+            margin: 1.5rem auto;
+        }
+
+        .file-upload-tip {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 40px;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .file-upload-tip:hover {
+            background: #e82127;
+        }
+
+        #logoFileInput {
+            display: none;
+        }
+
+        @media (max-width: 750px) {
+            .slide {
+                padding: 1.5rem;
+            }
+
+            .grid-2cols {
+                grid-template-columns: 1fr;
+            }
+
+            .slide-header h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        footer {
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 1rem;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="presentation-container">
+        <div class="slide-viewport" id="slideViewport">
+            <!-- slides dinámicos -->
+        </div>
+        <div class="nav-controls">
+            <div class="nav-buttons">
+                <button class="nav-btn" id="prevSlideBtn"><i class="fas fa-chevron-left"></i> Anterior</button>
+                <button class="nav-btn" id="nextSlideBtn">Siguiente <i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="slide-counter" id="slideCounter">Slide 1 / 8</div>
+            <div class="indicators" id="indicators"></div>
+        </div>
+    </div>
+    <footer>Informe Estratégico Tesla, Inc. 2026 · Auditoría de Negocios | Magaly Gómez</footer>
+
+    <script>
+        // --------------------------------------------------------------
+        // RUTA COMPLETA DE LA IMAGEN (FORMATO URL LOCAL)
+        // Convertimos la ruta de Windows a formato válido para navegador:
+        // "C:\Users\josel\Music\curso_web\trabajo magaly\WhatsApp Image 2026-04-07 at 2.48.29 PM.jpeg"
+        // -> file:///C:/Users/josel/Music/curso_web/trabajo%20magaly/WhatsApp%20Image%202026-04-07%20at%202.48.29%20PM.jpeg
+        const rawPath = "C:\\Users\\josel\\Music\\curso_web\\trabajo magaly\\WhatsApp Image 2026-04-07 at 2.48.29 PM.jpeg";
+        const logoUrl = "file:///" + rawPath.replace(/\\/g, "/").replace(/ /g, "%20");
+
+        // También guardamos la ruta original para fallback
+        let currentLogoUrl = logoUrl;
+
+        // Función para intentar cargar la imagen y si falla mostrar ayuda para seleccionar manual
+        function setupLogoWithFallback(imgElement) {
+            if (!imgElement) return;
+            imgElement.onerror = function () {
+                console.warn("No se pudo cargar la imagen desde la ruta local. Mostrando opción manual.");
+                // Mostrar mensaje dentro del contenedor del logo
+                const parent = imgElement.parentElement;
+                if (parent && !parent.querySelector('.error-overlay')) {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'error-overlay';
+                    errorDiv.style.position = 'absolute';
+                    errorDiv.style.inset = '0';
+                    errorDiv.style.background = 'rgba(0,0,0,0.7)';
+                    errorDiv.style.borderRadius = '50%';
+                    errorDiv.style.display = 'flex';
+                    errorDiv.style.flexDirection = 'column';
+                    errorDiv.style.alignItems = 'center';
+                    errorDiv.style.justifyContent = 'center';
+                    errorDiv.style.fontSize = '0.7rem';
+                    errorDiv.style.textAlign = 'center';
+                    errorDiv.style.padding = '0.5rem';
+                    errorDiv.innerHTML = '<i class="fas fa-image" style="font-size:1.5rem; margin-bottom:4px;"></i> <span>No se encontró la imagen</span><span style="font-size:0.6rem;">usa el botón 📁</span>';
+                    parent.style.position = 'relative';
+                    parent.appendChild(errorDiv);
+
+                    // añadir botón flotante o mostrar input file
+                    if (!document.getElementById('manualLogoBtn')) {
+                        const btn = document.createElement('div');
+                        btn.id = 'manualLogoBtn';
+                        btn.className = 'file-upload-tip';
+                        btn.innerHTML = '<i class="fas fa-folder-open"></i> Seleccionar imagen manualmente';
+                        btn.style.cursor = 'pointer';
+                        btn.style.position = 'absolute';
+                        btn.style.bottom = '-35px';
+                        btn.style.left = '50%';
+                        btn.style.transform = 'translateX(-50%)';
+                        btn.style.background = '#e82127';
+                        btn.style.color = 'white';
+                        btn.style.zIndex = '20';
+                        btn.style.width = 'max-content';
+                        btn.style.whiteSpace = 'nowrap';
+                        parent.appendChild(btn);
+
+                        btn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const fileInput = document.getElementById('logoFileInput');
+                            if (fileInput) fileInput.click();
+                        });
+                    }
+                }
+            };
+            imgElement.src = currentLogoUrl;
+        }
+
+        // ----- DEFINICIÓN DE SLIDES (estructura HTML) -----
+        const slidesData = [
+            // Slide 0: PORTADA con logo interactivo
+            `<div class="slide cover-slide" style="display: flex; flex-direction: column; justify-content: center; min-height: 550px;">
+            <div class="logo-area" id="portadaLogoContainer">
+                <img id="portadaLogoImg" alt="Logo Magaly Gómez" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <h1>INFORME DE ANÁLISIS EMPRESARIAL<br>AUDITORÍA DE NEGOCIOS</h1>
+            <div class="student-info">
+                <p><i class="fas fa-user-graduate"></i> ALUMNA: Magaly Gómez</p>
+                <p><i class="fas fa-chalkboard-user"></i> Economía y negocios V año I3 NOCTURNO</p>
+            </div>
+            <div style="margin-top: 0.5rem; opacity: 0.9;">
+                <i class="far fa-calendar-alt"></i> FECHA: 07 de abril de 2026
+            </div>
+            <div style="margin-top: 1rem; font-size: 1rem; border-top: 1px solid rgba(255,255,255,0.3); display: inline-block; padding-top: 0.8rem;">Tesla, Inc. · Perspectiva 2026</div>
+            <input type="file" id="logoFileInput" accept="image/jpeg,image/png,image/jpg" style="display:none">
+        </div>`,
+
+            // Slide 1: Descripción empresa
+            `<div class="slide">
+            <div class="slide-header"><i class="fas fa-chart-line"></i><h2>1. Descripción de la Empresa</h2></div>
+            <div><p style="font-size:1.05rem; line-height:1.4;"><strong>Tesla, Inc.</strong> lidera la transición global hacia la energía sostenible. Conocida por sus vehículos eléctricos (EV), su ecosistema abarca generación/almacenamiento de energía (SolarCity, Powerwall) e inteligencia artificial aplicada: conducción autónoma <strong>FSD</strong> y robot humanoide <strong>Optimus</strong>.</p>
+            <div style="background:#eef2ff; padding:1rem; border-radius:1rem; margin-top:1.5rem;"><i class="fas fa-robot" style="color:#e82127;"></i> <strong>En 2026:</strong> Tesla se define como compañía de robótica y software con infraestructura masiva de manufactura.</div></div>
+        </div>`,
+
+            // Slide 2: 5 Fuerzas Porter
+            `<div class="slide">
+            <div class="slide-header"><i class="fas fa-industry"></i><h2>2. Análisis de Industria (5 Fuerzas de Porter)</h2></div>
+            <div class="grid-2cols">
+                <div class="card-mini"><i class="fas fa-car-side"></i> <strong>Rivalidad competidores:</strong> Muy alta (VW, Ford, BYD).</div>
+                <div class="card-mini"><i class="fas fa-truck"></i> <strong>Poder proveedores:</strong> Alto (Litio, chips IA).</div>
+                <div class="card-mini"><i class="fas fa-users"></i> <strong>Poder clientes:</strong> Medio/Alto (Superchargers como ventaja).</div>
+                <div class="card-mini"><i class="fas fa-microchip"></i> <strong>Nuevos entrantes:</strong> Moderado (Xiaomi, Sony-Honda).</div>
+                <div class="card-mini"><i class="fas fa-bus"></i> <strong>Sustitutos:</strong> Bajo/Medio (Cybercabs como respuesta).</div>
+            </div>
+            <span class="badge">⛓️ Competencia feroz pero diferenciación tecnológica</span>
+        </div>`,
+
+            // Slide 3: FODA
+            `<div class="slide">
+            <div class="slide-header"><i class="fas fa-chart-simple"></i><h2>3. Análisis FODA</h2></div>
+            <div class="grid-2cols">
+                <div style="background:#e6f7ec; border-radius:1rem; padding:1rem;"><i class="fas fa-plus-circle" style="color:#2b9348;"></i> <strong>Fortalezas</strong><ul style="margin-top:0.5rem; margin-left:1rem;"><li>Liderazgo en datos e IA</li><li>Integración vertical profunda</li><li>Red Superchargers global</li></ul></div>
+                <div style="background:#ffe8e6; border-radius:1rem; padding:1rem;"><i class="fas fa-minus-circle" style="color:#c1121f;"></i> <strong>Debilidades</strong><ul style="margin-top:0.5rem; margin-left:1rem;"><li>Dependencia Elon Musk</li><li>Precios vs. BYD</li><li>Calidad inconsistente</li></ul></div>
+                <div style="background:#e3f2fd; border-radius:1rem; padding:1rem;"><i class="fas fa-lightbulb" style="color:#f4a261;"></i> <strong>Oportunidades</strong><ul style="margin-top:0.5rem; margin-left:1rem;"><li>Robotaxis (TaaS)</li><li>División energía Megapacks</li><li>Robótica Optimus</li></ul></div>
+                <div style="background:#fef4e6; border-radius:1rem; padding:1rem;"><i class="fas fa-exclamation-triangle" style="color:#e85d04;"></i> <strong>Amenazas</strong><ul style="margin-top:0.5rem; margin-left:1rem;"><li>Saturación EV / guerra precios</li><li>Regulaciones autonomía</li><li>Riesgos geopolíticos</li></ul></div>
+            </div>
+        </div>`,
+
+            // Slide 4: Cadena de Valor
+            `<div class="slide">
+            <div class="slide-header"><i class="fas fa-link"></i><h2>4. Cadena de Valor</h2></div>
+            <div class="grid-2cols">
+                <div class="card-mini"><i class="fas fa-hard-hat"></i> <strong>Logística interna:</strong> Compra directa de materias primas + diseño propio chips FSD.</div>
+                <div class="card-mini"><i class="fas fa-cogs"></i> <strong>Operaciones:</strong> Gigapress (megamoldes) reduce cientos de partes.</div>
+                <div class="card-mini"><i class="fas fa-truck-fast"></i> <strong>Logística externa:</strong> Venta directa (sin concesionarios).</div>
+                <div class="card-mini"><i class="fas fa-chalkboard-user"></i> <strong>Marketing:</strong> $0 publicidad tradicional; redes sociales + Elon Musk.</div>
+            </div>
+            <p style="margin-top:1rem; background:#f1f5f9; padding:0.7rem; border-radius:1rem;"><i class="fas fa-chart-line"></i> Modelo directo al consumidor + manufactura ágil.</p>
+        </div>`,
+
+            // Slide 5: VRIO
+            `<div class="slide">
+            <div class="slide-header"><i class="fas fa-gem"></i><h2>5. Análisis VRIO (Ventaja Competitiva)</h2></div>
+            <table class="vrio-table">
+                <thead><tr><th>Recurso</th><th>VRIO</th><th>Resultado</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Tecnología FSD + Datos</strong></td><td>Valioso, Raro, Inimitable, Organizado</td><td class="highlight">Ventaja Sostenible</td></tr>
+                    <tr><td><strong>Red de Superchargers</strong></td><td>Valiosa, Rara, difícil imitar, organizada</td><td class="highlight">Ventaja Sostenible</td></tr>
+                    <tr><td><strong>Gigafactories (Gigapress)</strong></td><td>Valiosa, no tan rara (BYD), pero difícil imitar</td><td class="highlight">Ventaja Competitiva Temporal</td></tr>
+                    <tr><td><strong>Marca + Marketing costo cero</strong></td><td>Valiosa, Rara, muy inimitable</td><td class="highlight">Ventaja Sostenible</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:0.8rem;"><i class="fas fa-database"></i> Los datos y red de carga generan un foso defensivo duradero.</p>
+        </div>`,
+
+            // Slide 6: Recomendaciones
+            `<div class="slide">
+            <div class="slide-header"><i class="fas fa-clipboard-list"></i><h2>6. Recomendaciones Estratégicas 2026</h2></div>
+            <div class="recom-item"><div class="recom-icon">1</div><div><strong>🚗 Lanzamiento del Modelo Económico (Project Redwood)</strong> – Vehículo de $25,000 vs competencia china.</div></div>
+            <div class="recom-item"><div class="recom-icon">2</div><div><strong>📱 Monetización de Software</strong> – Suscripción recurrente FSD (SaaS) para elevar márgenes.</div></div>
+            <div class="recom-item"><div class="recom-icon">3</div><div><strong>⚡ Expansión del Segmento Energía</strong> – Acelerar Megapacks (baterías industriales) para estabilizar ingresos.</div></div>
+            <div style="background:#0a0e1c10; margin-top:1rem; padding:1rem; border-radius:1rem;"><i class="fas fa-chart-line"></i> Visión 2026+: movilidad autónoma y almacenamiento energético como servicio.</div>
+        </div>`,
+
+            // Slide 7: Perspectiva final
+            `<div class="slide">
+            <div class="slide-header"><i class="fas fa-eye"></i><h2>Perspectiva 2026 · Panorama general</h2></div>
+            <p style="font-size:1rem; margin-bottom:1.5rem;">Tesla enfrenta alta rivalidad y saturación de EV, pero su ventaja en datos, integración vertical y ecosistema energético le otorgan resiliencia. La expansión de <strong>Robotaxis</strong> y la división de <strong>almacenamiento</strong> son las principales palancas de crecimiento.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
+                <span style="background:#e82127; color:white; padding:0.3rem 1rem; border-radius:30px;"><i class="fas fa-chart-line"></i> FSD como servicio</span>
+                <span style="background:#0f172a; color:white; padding:0.3rem 1rem; border-radius:30px;"><i class="fas fa-solar-panel"></i> Megapacks</span>
+                <span style="background:#334155; color:white; padding:0.3rem 1rem; border-radius:30px;"><i class="fas fa-robot"></i> Optimus</span>
+            </div>
+            <div style="margin-top:2rem; background:#fef2e8; border-radius:1rem; padding:0.8rem;"><i class="fas fa-chart-simple"></i> La guerra de precios acelera la necesidad de diversificación energética.</div>
+        </div>`
+        ];
+
+        let currentIndex = 0;
+        const viewport = document.getElementById('slideViewport');
+        const prevBtn = document.getElementById('prevSlideBtn');
+        const nextBtn = document.getElementById('nextSlideBtn');
+        const slideCounter = document.getElementById('slideCounter');
+        const indicatorsContainer = document.getElementById('indicators');
+
+        function renderSlide() {
+            if (!viewport) return;
+            viewport.innerHTML = slidesData[currentIndex];
+
+            // Cada vez que se renderiza la portada (index 0) intentamos vincular la imagen con la ruta especificada
+            if (currentIndex === 0) {
+                const logoImg = document.getElementById('portadaLogoImg');
+                if (logoImg) {
+                    setupLogoWithFallback(logoImg);
+                }
+                // Configurar input file para seleccionar manualmente
+                const fileInput = document.getElementById('logoFileInput');
+                if (fileInput) {
+                    fileInput.onchange = function (event) {
+                        const file = event.target.files[0];
+                        if (file && logoImg) {
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                logoImg.src = e.target.result;
+                                // quitar mensajes de error si existen
+                                const parent = logoImg.parentElement;
+                                const errorOverlay = parent.querySelector('.error-overlay');
+                                if (errorOverlay) errorOverlay.remove();
+                                const manualBtn = document.getElementById('manualLogoBtn');
+                                if (manualBtn) manualBtn.remove();
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    };
+                }
+            }
+            updateCounterAndDots();
+        }
+
+        function updateCounterAndDots() {
+            slideCounter.innerText = `Slide ${currentIndex + 1} / ${slidesData.length}`;
+            if (indicatorsContainer) {
+                indicatorsContainer.innerHTML = '';
+                for (let i = 0; i < slidesData.length; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    if (i === currentIndex) dot.classList.add('active');
+                    dot.addEventListener('click', (function (idx) { return function () { goToSlide(idx); }; })(i));
+                    indicatorsContainer.appendChild(dot);
+                }
+            }
+        }
+
+        function goToSlide(index) {
+            if (index >= 0 && index < slidesData.length) {
+                currentIndex = index;
+                renderSlide();
+            }
+        }
+
+        function nextSlide() {
+            if (currentIndex < slidesData.length - 1) {
+                currentIndex++;
+                renderSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderSlide();
+            }
+        }
+
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+        });
+
+        renderSlide();
+    </script>
+</body>
+
+</html>
