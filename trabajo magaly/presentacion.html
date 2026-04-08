@@ -317,7 +317,7 @@
         // "C:\Users\josel\Music\curso_web\trabajo magaly\WhatsApp Image 2026-04-07 at 2.48.29 PM.jpeg"
         // -> file:///C:/Users/josel/Music/curso_web/trabajo%20magaly/WhatsApp%20Image%202026-04-07%20at%202.48.29%20PM.jpeg
         const rawPath = "WhatsApp Image 2026-04-07 at 2.48.29 PM.jpeg";
-        const logoUrl = "file:///" + rawPath.replace(/\\/g, "/").replace(/ /g, "%20");
+        const logoUrl = rawPath;
 
         // También guardamos la ruta original para fallback
         let currentLogoUrl = logoUrl;
